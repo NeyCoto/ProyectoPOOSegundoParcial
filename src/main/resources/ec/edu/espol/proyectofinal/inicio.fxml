@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="462.0" prefWidth="771.0" style="-fx-background-color: #1c0403;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controller.InicioController">
+   <children>
+      <ImageView fitHeight="456.0" fitWidth="771.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane layoutX="422.0" layoutY="51.0" prefHeight="360.0" prefWidth="321.0" style="-fx-background-color: #9C2B27;">
+         <children>
+            <TextField layoutX="32.0" layoutY="129.0" prefHeight="20.0" prefWidth="254.0" promptText="email" />
+            <TextField layoutX="32.0" layoutY="208.0" prefHeight="25.0" prefWidth="254.0" promptText="password" />
+            <JFXButton layoutX="32.0" layoutY="283.0" prefHeight="25.0" prefWidth="254.0" style="-fx-background-color: #E45652;" text="Sign in" textAlignment="CENTER" textFill="WHITE" />
+            <Label layoutX="99.0" layoutY="39.0" text="Welcome back." textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <ImageView fitHeight="462.0" fitWidth="610.0" layoutX="-211.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../img/photo.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="54.0" layoutY="34.0" text="Welcome to BetterMove" textFill="WHITE">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="94.0" layoutY="269.0" text="Get faster. &#10;&#9;Get Smarter.&#10;&#9;&#9;Get Better. &#10;&#9;&#9;&#9;Get BetterMove." textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="77.0" layoutY="389.0" prefHeight="25.0" prefWidth="254.0" style="-fx-background-color: #E45652;" text="Sign Up" textAlignment="CENTER" textFill="WHITE" />
+      <Label fx:id="label" layoutX="750.0" layoutY="6.0" onMouseClicked="#handleClose" text="X" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
