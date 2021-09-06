@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -20,8 +21,9 @@ import java.util.Scanner;
  *
  * @author camil
  */
-public class Comprador extends Usuario{
+public class Comprador extends Usuario implements Serializable{
     private ArrayList<Oferta> ofertas;
+    
 
     public Comprador(int id, String nombres, String apellidos, String correo_elec, String organizacion, String clave) {
         super(id, nombres, apellidos, correo_elec, organizacion, clave);

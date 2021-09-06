@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" minHeight="462.0" minWidth="771.0" prefHeight="462.0" prefWidth="771.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controller.AplicacionController">
+   <children>
+      <VBox fx:id="viibox1" prefHeight="462.0" prefWidth="246.0" style="-fx-background-color: #9C2B27;">
+         <children>
+            <Pane fx:id="betterMovePane" onMouseClicked="#regresar" prefHeight="96.0" prefWidth="246.0">
+               <children>
+                  <Label layoutX="99.0" layoutY="34.0" text="BetterMove" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="42.0" fitWidth="51.0" layoutX="35.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button fx:id="perfilBoton" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#perfil" prefHeight="53.0" prefWidth="246.0" style="-fx-background-color: #9C2B27;" text="Perfil" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="registrarVehiculoBoton" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#registrarVehiculo" prefHeight="53.0" prefWidth="246.0" style="-fx-background-color: #9C2B27;" text="Registrar Vehiculo (vendedor)" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="aceptarOfertasBoton" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#aceptarOfertas" prefHeight="53.0" prefWidth="246.0" style="-fx-background-color: #9C2B27;" text="Aceptar ofertas(vendedor)" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="comprarBoton" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#comprarVehiculo" prefHeight="53.0" prefWidth="246.0" style="-fx-background-color: #9C2B27;" text="Comprar un vehiculo(comprador)" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane layoutX="246.0" prefHeight="462.0" prefWidth="525.0">
+         <children>
+            <VBox fx:id="cambioVbox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Label prefHeight="77.0" prefWidth="456.0" text="Cambio de contraseña / rol">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="20.0" right="30.0" top="20.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Contraseña actual">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="contraseñaActual" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="461.0" promptText="Contraseña actual" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva Contraseña">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="nuevaContraseña" maxWidth="-Infinity" prefHeight="25.0" prefWidth="461.0" promptText="Nueva Contraseña" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vuelva a escribir la contraseña">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="nuevaContraseña2" maxWidth="-Infinity" prefHeight="25.0" prefWidth="461.0" promptText="Vuelva a escribir la contraseña" />
+                  <Text fx:id="faltaTexto" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rol actual">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <Text fx:id="userRol" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cambio de rol">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <HBox prefHeight="24.0" prefWidth="525.0" spacing="20.0">
+                     <children>
+                        <CheckBox fx:id="vendedorCheck" mnemonicParsing="false" text="Vendedor" />
+                        <CheckBox fx:id="compradorCheck" mnemonicParsing="false" text="Comprador" />
+                        <Text fx:id="elegirRolError" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onMouseClicked="#cambioUser" text="Cambiar">
+                     <VBox.margin>
+                        <Insets left="225.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="perfilMenu" layoutX="-811.0" layoutY="302.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="105.0" prefWidth="258.0" text="Perfil Settings">
+                           <font>
+                              <Font name="System Bold" size="31.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="20.0" left="23.0" right="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Button mnemonicParsing="false" onMouseClicked="#editarPerfil" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #9C2B27; -fx-background-radius: 30;" text="Editar Perfil" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="35.0" top="35.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../img/editar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="371.0" prefWidth="481.0" spacing="20.0">
+                     <children>
+                        <Label text="Perfil details">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="29.0" prefWidth="481.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="71.0" text="Nombre">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="27.0" prefWidth="406.0">
+                                 <children>
+                                    <Text fx:id="nombre" layoutX="190.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="481.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="71.0" text="Apellidos">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="27.0" prefWidth="406.0">
+                                 <children>
+                                    <Text fx:id="apellidos" layoutX="190.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="481.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="187.0" text="Correo Electronico">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="27.0" prefWidth="406.0">
+                                 <children>
+                                    <Text fx:id="correoE" layoutX="130.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="481.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="187.0" text="Organización">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="27.0" prefWidth="406.0">
+                                 <children>
+                                    <Text fx:id="organizacion" layoutX="131.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="481.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="187.0" text="Contraseña">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="27.0" prefWidth="406.0">
+                                 <children>
+                                    <Text fx:id="clave" layoutX="131.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="481.0">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="187.0" text="Rol">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="27.0" prefWidth="406.0">
+                                 <children>
+                                    <Text fx:id="rol" layoutX="132.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="25.0" right="20.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+            <Pane fx:id="pruebaPane1" prefHeight="433.0" prefWidth="513.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text layoutX="192.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prueba de Envio de Correo" />
+                  <Button layoutX="219.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#enviarCorreo" text="Enviar Correo" />
+               </children>
+            </Pane>
+            <VBox fx:id="menu" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Label alignment="CENTER" text="Escoga el tipo de Vehiculo ">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets left="124.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="59.0" prefWidth="525.0" spacing="25.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#registroCarro" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #9C2B27; -fx-background-radius: 30;" text="Carro" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../img/carro.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#registroMoto" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #9C2B27; -fx-background-radius: 30;" text="Moto" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../img/moto.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#registroCamioneta" prefHeight="36.0" prefWidth="132.0" style="-fx-background-color: #9C2B27; -fx-background-radius: 30;" text="Camioneta" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../img/camioneta.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="carro" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="211.0" text="Registro de Carro" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="525.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="placa" promptText="Placa" />
+                        <TextField fx:id="marca" promptText="Marca" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="525.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="modelo" promptText="Modelo" />
+                        <TextField fx:id="tipoMotor" promptText="Tipo de Motor" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="525.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="anio" promptText="Año" />
+                        <TextField fx:id="recorrido" promptText="Recorrido" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="525.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="color" promptText="Color" />
+                        <TextField fx:id="tipoCombustible" promptText="Tipo de Combustible" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="525.0" spacing="30.0">
+                     <children>
+                        <TextField fx:id="vidrios" promptText="Vidrios" />
+                        <TextField fx:id="transmision" promptText="Transmision" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="precio" maxWidth="-Infinity" prefWidth="149.0" promptText="Precio">
+                     <VBox.margin>
+                        <Insets left="188.0" top="12.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Text fx:id="errorT" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox prefHeight="75.0" prefWidth="525.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="agregarImg" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000000; -fx-border-radius: 10;" text="Agregar Imagen">
+                           <HBox.margin>
+                              <Insets left="20.0" top="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <ScrollPane fx:id="scrollPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="65.0" prefWidth="359.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                           <content>
+                              <ListView fx:id="listview" prefHeight="65.0" prefWidth="358.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <Button fx:id="registrar" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#registroCarro" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #9C2B27; -fx-background-radius: 30;" text="Registrar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="207.0" top="15.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Pane fx:id="moto" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text fx:id="textoError" layoutX="377.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane fx:id="pruebaPane" prefHeight="433.0" prefWidth="513.0" style="-fx-background-color: #fff;">
+               <children>
+                  <ImageView fitHeight="248.0" fitWidth="328.0" layoutX="139.0" layoutY="-68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/44881ddc5be0803a64e1fb4a54fa73aa-banner-de-insignia-clasica-de-bienvenida.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </Pane>
+            <Pane fx:id="camioneta" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text fx:id="eTexto" layoutX="336.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="registrarCamioneta" layoutX="237.0" layoutY="411.0" mnemonicParsing="false" text="Registrar" />
+               </children>
+            </Pane>
+            <Pane fx:id="comprarPane" prefHeight="433.0" prefWidth="513.0" style="-fx-background-color: #fff;">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="71.0" layoutY="131.0" prefHeight="311.0" prefWidth="406.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="txtTipoV" promptText="Tipo de vehiculo" />
+                        <GridPane hgap="5.0" vgap="5.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextField fx:id="txtRecMax" promptText="Recorrido Max" />
+                              <TextField fx:id="txtRecMin" promptText="Recorrido Min" GridPane.columnIndex="1" />
+                              <TextField fx:id="txtAnoMax" promptText="Año Max" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtAnoMin" promptText="Año Min" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtPrecioMax" promptText="Precio Max" GridPane.rowIndex="2" />
+                              <TextField fx:id="txtPrecioMin" promptText="Precio Min" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <Button mnemonicParsing="false" onAction="#btnBuscar" text="Buscar" textAlignment="CENTER" />
+                        <Text fx:id="txtAnuncio" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Text fx:id="txtAnuncio1" layoutX="213.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <Text layoutX="231.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR CARRO" />
+               </children>
+            </Pane>
+            <Pane fx:id="ofertarInfoPane" prefHeight="433.0" prefWidth="513.0" style="-fx-background-color: #fff;">
+               <children>
+                  <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="436.0" prefWidth="525.0">
+                     <right>
+                        <Button fx:id="btnSiguienteObj" mnemonicParsing="false" onAction="#btnSiguienteV" text="&gt;" BorderPane.alignment="CENTER" />
+                     </right>
+                     <left>
+                        <Button fx:id="btnAnteriorObj" mnemonicParsing="false" onAction="#btnAnteriorV" text="&lt;" BorderPane.alignment="CENTER" />
+                     </left>
+                     <center>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Text fx:id="txtTitulo" strokeType="OUTSIDE" strokeWidth="0.0" text="TITULO">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <ImageView fx:id="imgVehiculoInfo" fitHeight="225.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Pane prefHeight="58.0" prefWidth="401.0">
+                                 <children>
+                                    <TextField fx:id="txtPrecioBoxOfertar" alignment="CENTER" layoutX="75.0" layoutY="17.0" prefHeight="0.0" prefWidth="306.0" promptText="\$0.00" />
+                                 </children>
+                              </Pane>
+                              <Button mnemonicParsing="false" onAction="#btnofertarBox" text="OFERTAR" />
+                              <Text fx:id="textRealizado" disable="true" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </VBox>
+                     </center>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </BorderPane>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+      <Label fx:id="label" layoutX="750.0" onMouseClicked="#handleClose" text="X" textAlignment="CENTER">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

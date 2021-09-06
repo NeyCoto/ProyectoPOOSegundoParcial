@@ -24,39 +24,75 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
-/*import javax.mail.Address;
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;*/
+import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author camil
- */
+
 public class Util {
     private Util(){}
     
     
-    // READ /USER TXT/OFFER TXT AND RETURN ID NUMBER OF LAST USER/OFFER + 1, TO MAKE A NEW OFFER/USER WITH NEW ID
+    // OBTIENE ULTIMO CODIGO DE USUARIO +1
     public static int nextID(String nomfile)
     {
-        int id = 0;
-        try(Scanner sc = new Scanner(new File(nomfile)))
-        {
-           while(sc.hasNextLine())
-           {
-               String linea = sc.nextLine();
-               String[] tokens = linea.split("\\|");
-               id = Integer.parseInt(tokens[0]);
-           }
+        try(FileInputStream fin = new FileInputStream(nomfile);ObjectInputStream oin = new ObjectInputStream(fin);) {
+            ArrayList<Usuario> usuarios = (ArrayList<Usuario>)oin.readObject(); 
+            if(!usuarios.isEmpty()){
+                Usuario ultimoUsuario = usuarios.get(usuarios.size()-1);
+                return ultimoUsuario.getId()+1;
+            }                  
+        } 
+        catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } 
+        catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
-        catch(Exception e)
-        {
+        return 1;
+    }
+    
+    //OBTIENE ULTIMO CODIGO DE VEHICULO+1
+    public static int nextIDVehiculo(String nomfile)
+    {
+        try(FileInputStream fin = new FileInputStream(nomfile);ObjectInputStream oin = new ObjectInputStream(fin);) {
+            ArrayList<Vehiculo> vehiculos = (ArrayList<Vehiculo>)oin.readObject(); 
+            if(!vehiculos.isEmpty()){
+                Vehiculo ultimoVehiculo = vehiculos.get(vehiculos.size()-1);
+                return ultimoVehiculo.getId()+1;
+            }                  
+        } 
+        catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } 
+        catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
-        return id+1;
+        return 1;
+    }
+    
+    // OBTIENE ULTIMO CODIGO DE OFERTA +1
+     public static int nextIDOffer(String nomfile)
+    {
+        try(FileInputStream fin = new FileInputStream(nomfile);ObjectInputStream oin = new ObjectInputStream(fin);) {
+            ArrayList<Oferta> ofertas = (ArrayList<Oferta>)oin.readObject();
+            if(!ofertas.isEmpty()){
+                Oferta ultimaOferta = ofertas.get(ofertas.size()-1);
+                return ultimaOferta.getId()+1;
+            }
+                         
+        } 
+        catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } 
+        catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return 1;
     }
     
     
@@ -91,73 +127,53 @@ public class Util {
         return hexString.toString(); 
     }
   
-    
-    /*
-    // ENVIA MENSAJE AL CORREO
     public static void enviarConGMail(String destinatario,String remitente, String asunto, String cuerpo, String clave) {
-    // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
     
-    Properties props = System.getProperties();
-    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
-    props.put("mail.smtp.user", remitente); // Direccion del Remitente del mensaje
-    props.put("mail.smtp.clave", clave);    //La clave de la cuenta
-    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
-    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
-    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.user", remitente);
+        props.put("mail.smtp.clave", clave);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.port", "587");
 
-    Session session = Session.getDefaultInstance(props);
-    MimeMessage message = new MimeMessage(session);
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
 
-    try {
-        message.setFrom(new InternetAddress(remitente));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se obtiene del address del destinatario y se podrían añadir varios de la misma manera
-        message.setSubject(asunto);
-        message.setText(cuerpo);
-        Transport transport = session.getTransport("smtp");
-        transport.connect("smtp.gmail.com", remitente, clave);
-        transport.sendMessage(message, message.getAllRecipients());
-        transport.close();
-    }
-    catch (MessagingException me) {
-        me.printStackTrace();   //Si se produce un error
-    }
-}*/
-  
-    /*
-    // SAVE EACH USUARIO'S CLAVE FROM A GIVEN LIST OF USERS
-    public static void crearArchivoHash(ArrayList<Usuario> usuarios, String nomfile){
-        
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile))))
-        {
-            for (Usuario usu: usuarios){
-                pw.println(toHexString(getSHA(usu.getClave())));
-            }
+        try {
+            message.setFrom(new InternetAddress(remitente));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            message.setSubject(asunto);
+            message.setText(cuerpo);
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", remitente, clave);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        } 
-        
-    }*/
+        catch (MessagingException me) {
+            me.printStackTrace();
+        }
+}
+
+  
+ 
     // CONVERT EACH USUARIO'S CLAVE FROM A GIVEN LIST OF USERS IN A HASHCODE 
     public static ArrayList<String> convertirClaveHash(ArrayList<Usuario> usuarios){
         ArrayList<String> clavesHash = new ArrayList<String>();
         for (Usuario usu: usuarios){
             try {
                 clavesHash.add(toHexString(getSHA(usu.getClave())));
-            } catch (NoSuchAlgorithmException ex) {
+            } 
+            catch (NoSuchAlgorithmException ex) {
                 ex.printStackTrace();
             }
-            }
+        }
         return clavesHash;
     }
     // SAVE EACH USUARIO'S CLAVE FROM A GIVEN LIST OF USERS IN A HASHCODE FILE
     public static void crearArchivoHash(ArrayList<Usuario> usuarios,String nomfile){
-        try{
-            FileOutputStream fous = new FileOutputStream(nomfile);
-            ObjectOutputStream out = new ObjectOutputStream(fous);
-            Util.convertirClaveHash(usuarios);
+        try(FileOutputStream fous = new FileOutputStream(nomfile);ObjectOutputStream out = new ObjectOutputStream(fous);){
             out.writeObject(Util.convertirClaveHash(usuarios));
-            out.flush();
         }catch(IOException e){
             System.err.println(e);
         } 
@@ -299,6 +315,16 @@ public class Util {
         return -1;
     }
     
+    // RETURN USER IF USER CORREO EQUALS GIVEN CORREO
+    public static Usuario searchBycorreo(String correo,ArrayList<Usuario> usuarios){
+        for(Usuario user : usuarios)
+        {
+            if(user.getCorreo_elec().equals(correo))
+                return user;
+        }
+        return null;
+    }
+    
     // VERIFY IF DOUBLE IS GREATER OR LESS THAN 0
     public static boolean isNumeric(String cadena){
 	try {
@@ -311,7 +337,7 @@ public class Util {
         catch (NumberFormatException nfe){
 		return false;
 	}
-}
+    }
 
     // VERIFY IF INT IS GREATER OR LESS THAN 0
     public static boolean isInt(String cadena){
@@ -321,6 +347,8 @@ public class Util {
                     return true;
                 else
                     return false;
+                
+
 	} 
         catch (NumberFormatException nfe){
 		return false;

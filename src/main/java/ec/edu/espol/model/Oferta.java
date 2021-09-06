@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -21,13 +22,15 @@ import java.util.Scanner;
  *
  * @author camil
  */
-public class Oferta {
+public class Oferta implements Serializable {
+
     private int id;
     private Comprador comprador;
     private int id_comprador;
     private Vehiculo vehiculo;
     private int id_vehiculo;
     private double precio;
+    private static final long serialVersionUID = 8799656478674716638L;
 
     public Oferta(int id, int id_comprador, int id_vehiculo, double precio) {
         this.id = id;
@@ -84,7 +87,6 @@ public class Oferta {
         this.precio = precio;
     }
 
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -113,7 +115,7 @@ public class Oferta {
     public String toString() {
         return "Oferta{" + "id=" + id + ", id_comprador=" + id_comprador + ", id_vehiculo=" + id_vehiculo + ", precio=" + precio + '}';
     }
- 
+
     /*
     // SAVE NEW OFFER IN OFFER TXT
     public void saveFile(String nomfile){
@@ -125,22 +127,19 @@ public class Oferta {
             System.out.println(e.getMessage());
         }
     }*/
-    
     // SAVE NEW OFFER IN OFFER BINARY FILE
-     public void saveFile(String nomfile){
-        try(FileOutputStream fous = new FileOutputStream(nomfile);ObjectOutputStream out = new ObjectOutputStream(fous);){
-            Oferta o = new Oferta(this.id,this.id_comprador,this.id_vehiculo,this.precio);
+    public void saveFile(String nomfile) {
+        try (FileOutputStream fous = new FileOutputStream(nomfile); ObjectOutputStream out = new ObjectOutputStream(fous);) {
+            Oferta o = new Oferta(this.id, this.id_comprador, this.id_vehiculo, this.precio);
             out.writeObject(o);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
-        } 
+        }
     }
-    
-    
-     
-     /*
+
+    /*
     // READ FILE OF OFFERS TXT AND RETURN LIST OF OFFER
     public static ArrayList<Oferta> readFile(String nomfile){
         ArrayList<Oferta> ofertas = new ArrayList<>();
@@ -158,29 +157,23 @@ public class Oferta {
         }
         return ofertas;
     }*/
-    
     // READ FILE OF OFFERS BINARY FILE AND RETURN LIST OF OFFER
-    public static ArrayList<Oferta> readFile(String nomfile){
-        try(FileInputStream fin = new FileInputStream(nomfile);ObjectInputStream oin = new ObjectInputStream(fin);){
-            ArrayList<Oferta> ofertas = (ArrayList<Oferta>)oin.readObject();
+    public static ArrayList<Oferta> readFile(String nomfile) {
+        try (FileInputStream fin = new FileInputStream(nomfile); ObjectInputStream oin = new ObjectInputStream(fin);) {
+            ArrayList<Oferta> ofertas = (ArrayList<Oferta>) oin.readObject();
             return ofertas;
-        } 
-        catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        } 
-        catch (IOException | ClassNotFoundException ex){
+        } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
-    
-    
-    
+
     // BASICALLY SEARCH IN A LIST OF OFFER IF ANY COMPRADOR ID EQUALS OFFER ID, REPEAT IT WITH VEHICULO. 
     //THEN, ADD THAT OFFER TO THE LIST OF OFFERS OF COMPRADOR AND VEHICULO, SET COMPRADOR AND VEHICULO IN THIS OFFER TOO.
-    public static void link(ArrayList<Comprador> compradores, ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas){
-        for(Oferta o: ofertas){
+    public static void link(ArrayList<Comprador> compradores, ArrayList<Vehiculo> vehiculos, ArrayList<Oferta> ofertas) {
+        for (Oferta o : ofertas) {
             Comprador comp = Comprador.searchByID(compradores, o.getId_comprador());
             Vehiculo veh = Vehiculo.searchByID(vehiculos, o.getId_vehiculo());
             comp.getOfertas().add(o);
@@ -189,19 +182,17 @@ public class Oferta {
             o.setVehiculo(veh);
         }
     }
-    
-    
+
     // RETURN OFFER IF ID MATCHES
-    public static Oferta searchByID(ArrayList<Oferta> ofertas, int id)
-    {
-        for(Oferta o : ofertas)
-        {
-            if(o.id == id)
+    public static Oferta searchByID(ArrayList<Oferta> ofertas, int id) {
+        for (Oferta o : ofertas) {
+            if (o.id == id) {
                 return o;
+            }
         }
         return null;
     }
-    
+
     /*
     // SAVE OFFER IN A OFFER LIST, GIVEN A LIST
     public static void saveFile(String nomfile,ArrayList<Oferta> ofertas){
@@ -214,16 +205,14 @@ public class Oferta {
             System.out.println(e.getMessage());
         }
     }*/
-    
     // SAVE OFFER OF A OFFER LIST IN A BINARY FILE
-    public static void saveFile(String nomfile, ArrayList<Oferta> ofertas){
-        try(FileOutputStream fous = new FileOutputStream(nomfile);ObjectOutputStream out = new ObjectOutputStream(fous);){
-            for(Oferta o: ofertas)
-                out.writeObject(o);
+    public static void saveFile(String nomfile, ArrayList<Oferta> ofertas) {
+        try (FileOutputStream fous = new FileOutputStream(nomfile); ObjectOutputStream out = new ObjectOutputStream(fous);) {
+            out.writeObject(ofertas);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
-        } 
+        }
     }
 }

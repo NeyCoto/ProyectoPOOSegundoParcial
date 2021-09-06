@@ -7,4 +7,5 @@ module ec.edu.espol.proyectofinal {
     opens ec.edu.espol.controller to javafx.fxml;
     exports ec.edu.espol.proyectofinal;
     exports ec.edu.espol.controller;
+    requires java.mail;
 }

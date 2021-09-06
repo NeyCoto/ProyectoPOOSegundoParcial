@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -23,9 +24,10 @@ import java.util.Scanner;
  *
  * @author camil
  */
-public class Usuario {
+public class Usuario implements Serializable {
     protected int id;
     protected String nombres, apellidos, correo_elec, organizacion, clave;
+    private static final long serialVersionUID = 8799656478674716638L;
 
 
     public Usuario(int id, String nombres, String apellidos, String correo_elec, String organizacion, String clave) {
@@ -99,7 +101,7 @@ public class Usuario {
             return false;
         }
         Usuario other = (Usuario) obj;
-        return (this.id != other.id && !Objects.equals(this.correo_elec, other.correo_elec));
+        return Objects.equals(this.correo_elec, other.correo_elec);
     }
     
 
@@ -152,9 +154,20 @@ public class Usuario {
     
     // SAVE NEW USER IN A BINARY FILE
     public void saveFile(String nomfile){
-        try(FileOutputStream fous = new FileOutputStream(nomfile);ObjectOutputStream out = new ObjectOutputStream(fous);){
-            Usuario u = new Usuario(this.id, this.nombres, this.apellidos, this.correo_elec, this.organizacion, this.clave);
+        try(FileOutputStream fous = new FileOutputStream(nomfile);ObjectOutputStream out = new ObjectOutputStream(fous);){  
+            Usuario u = new Usuario(this.id, this.nombres, this.apellidos, this.correo_elec, this.organizacion, this.clave);  
             out.writeObject(u);
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } 
+    }
+    
+     public void saveFile(String nomfile, ArrayList<Usuario> usuarios){
+        try(FileOutputStream fous = new FileOutputStream(nomfile);ObjectOutputStream out = new ObjectOutputStream(fous);){               
+            out.writeObject(usuarios);
             
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -188,8 +201,8 @@ public class Usuario {
     
     // READ USER BINARY FILE AND RETURN LIST OF USERS
     public static ArrayList<Usuario> readFile_usuario(String nomfile){
-        try(FileInputStream fin = new FileInputStream(nomfile);ObjectInputStream oin = new ObjectInputStream(fin);) {
-            ArrayList<Usuario> usuarios = (ArrayList<Usuario>)oin.readObject();
+        try(FileInputStream fin = new FileInputStream(nomfile);ObjectInputStream oin = new ObjectInputStream(fin);) {         
+            ArrayList<Usuario> usuarios = (ArrayList<Usuario>)oin.readObject();      
             return usuarios;
         } 
         catch (FileNotFoundException ex) {
